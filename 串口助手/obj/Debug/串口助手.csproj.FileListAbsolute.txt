@@ -16,3 +16,4 @@ D:\VS files\串口助手\---\串口助手\obj\Debug\串口助手.csprojResolveAs
 D:\VS files\串口助手\---\串口助手\obj\Debug\串口助手.Form1.resources
 D:\VS files\串口助手\---\串口助手\obj\Debug\串口助手.Properties.Resources.resources
 D:\VS files\串口助手\---\串口助手\obj\Debug\串口助手.csproj.GenerateResource.Cache
+D:\VS files\串口助手\---\串口助手\bin\Debug\IrisSkin2.dll

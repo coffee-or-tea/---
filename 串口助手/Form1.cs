@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.Win32;
 
 namespace 串口助手
 {
@@ -17,7 +19,8 @@ namespace 串口助手
         {
             InitializeComponent();
         }
-
+        string[] stylePath = Directory.GetFiles(@"D:\VS files\串口助手\---\串口助手\bin\Debug\传智播客_C#开发超级千千静听播放器源码和资料\皮肤\skin");
+        int skini;
         private void Form1_Load(object sender, EventArgs e)
         {
             string[] ports = SerialPort.GetPortNames();
@@ -25,6 +28,19 @@ namespace 串口助手
             comboBoxPorts.Items.AddRange(ports);
             comboBoxPorts.SelectedIndex = comboBoxPorts.Items.Count > 0 ? 0 : -1;
             comboBoxBaudrate.SelectedIndex = comboBoxBaudrate.Items.IndexOf("38400");//选择波特率  
+            
+            
+            //RegistryHelper rh = new RegistryHelper();
+            //string skin = rh.GetRegistryData(Registry.LocalMachine, "SOFTWARE\\TagReceiver\\Params\\SerialPort", "skin");
+            //try
+            //{
+            //    skini = int.Parse(skin);
+            //}
+            //catch (Exception ex)
+            //{
+            //    skini = 1; 
+            //}
+            //skinEngine1.SkinFile = @stylePath[skini-1];
         }
 
         private void buttonOpenPort_Click(object sender, EventArgs e)
@@ -106,6 +122,13 @@ namespace 串口助手
                 this.textBoxReceivedData.AppendText(strbuilder.ToString());
 
             }));
+        }
+        
+        private void btnCHangeStyle_Click(object sender, EventArgs e)
+        {
+            skinEngine1.SkinFile = @stylePath[skini++];
+            RegistryHelper rh = new RegistryHelper();
+            //rh.SetRegistryData(Registry.LocalMachine, "SOFTWARE\\TagReceiver\\Params\\SerialPort", "skin", skini.ToString());
         }
     }
 }

@@ -49,6 +49,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.lblTx = new System.Windows.Forms.Label();
             this.lblRx = new System.Windows.Forms.Label();
+            this.skinEngine1 = new Sunisoft.IrisSkin.SkinEngine(((System.ComponentModel.Component)(this)));
+            this.btnCHangeStyle = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -233,11 +235,27 @@
             this.lblRx.TabIndex = 15;
             this.lblRx.Text = "0";
             // 
+            // skinEngine1
+            // 
+            this.skinEngine1.SerialNumber = "";
+            this.skinEngine1.SkinFile = null;
+            // 
+            // btnCHangeStyle
+            // 
+            this.btnCHangeStyle.Location = new System.Drawing.Point(634, 362);
+            this.btnCHangeStyle.Name = "btnCHangeStyle";
+            this.btnCHangeStyle.Size = new System.Drawing.Size(48, 23);
+            this.btnCHangeStyle.TabIndex = 16;
+            this.btnCHangeStyle.Text = "换肤";
+            this.btnCHangeStyle.UseVisualStyleBackColor = true;
+            this.btnCHangeStyle.Click += new System.EventHandler(this.btnCHangeStyle_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(695, 394);
+            this.Controls.Add(this.btnCHangeStyle);
             this.Controls.Add(this.lblRx);
             this.Controls.Add(this.lblTx);
             this.Controls.Add(this.label3);
@@ -286,6 +304,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lblTx;
         private System.Windows.Forms.Label lblRx;
+        private Sunisoft.IrisSkin.SkinEngine skinEngine1;
+        private System.Windows.Forms.Button btnCHangeStyle;
     }
 }
 
