@@ -128,7 +128,13 @@ namespace 串口助手
         {
             skinEngine1.SkinFile = @stylePath[skini++];
             RegistryHelper rh = new RegistryHelper();
-            //rh.SetRegistryData(Registry.LocalMachine, "SOFTWARE\\TagReceiver\\Params\\SerialPort", "skin", skini.ToString());
+            bool registryYes=rh.IsRegistryExist(Registry.LocalMachine, "SOFTWARE\\TagReceiver\\Params\\SerialPort", "skin");
+            if (registryYes)
+            {
+                rh.DeleteRegist(Registry.LocalMachine, "SOFTWARE\\TagReceiver\\Params\\SerialPort", "skin");
+            }
+            
+            rh.SetRegistryData(Registry.LocalMachine, "SOFTWARE\\TagReceiver\\Params\\SerialPort", "skin", skini.ToString());
         }
     }
 }
