@@ -28,19 +28,21 @@ namespace 串口助手
             comboBoxPorts.Items.AddRange(ports);
             comboBoxPorts.SelectedIndex = comboBoxPorts.Items.Count > 0 ? 0 : -1;
             comboBoxBaudrate.SelectedIndex = comboBoxBaudrate.Items.IndexOf("38400");//选择波特率  
-            
-            
-            //RegistryHelper rh = new RegistryHelper();
-            //string skin = rh.GetRegistryData(Registry.LocalMachine, "SOFTWARE\\TagReceiver\\Params\\SerialPort", "skin");
-            //try
-            //{
-            //    skini = int.Parse(skin);
-            //}
-            //catch (Exception ex)
-            //{
-            //    skini = 1; 
-            //}
-            //skinEngine1.SkinFile = @stylePath[skini-1];
+
+            RegistryKey key = Registry.LocalMachine;
+            RegistryKey software = key.CreateSubKey("software\\test");
+            //在HKEY_LOCAL_MACHINE\SOFTWARE下新建名为test的注册表项。如果已经存在则不影响！
+
+
+
+            string info = "";
+            RegistryKey Key;
+            Key = Registry.LocalMachine;
+            RegistryKey myreg = Key.OpenSubKey("software\\test");
+            // myreg = Key.OpenSubKey("software\\test",true);
+            skini = int.Parse(myreg.GetValue("skin").ToString());
+            myreg.Close();
+            skinEngine1.SkinFile = @stylePath[skini++];   
         }
 
         private void buttonOpenPort_Click(object sender, EventArgs e)
@@ -126,15 +128,16 @@ namespace 串口助手
         
         private void btnCHangeStyle_Click(object sender, EventArgs e)
         {
-            skinEngine1.SkinFile = @stylePath[skini++];
-            RegistryHelper rh = new RegistryHelper();
-            bool registryYes=rh.IsRegistryExist(Registry.LocalMachine, "SOFTWARE\\TagReceiver\\Params\\SerialPort", "skin");
-            if (registryYes)
-            {
-                rh.DeleteRegist(Registry.LocalMachine, "SOFTWARE\\TagReceiver\\Params\\SerialPort", "skin");
-            }
-            
-            rh.SetRegistryData(Registry.LocalMachine, "SOFTWARE\\TagReceiver\\Params\\SerialPort", "skin", skini.ToString());
+            skinEngine1.SkinFile = @stylePath[skini++];   
+            RegistryKey key = Registry.LocalMachine;
+            RegistryKey software = key.OpenSubKey("software\\test", true); //该项必须已存在
+            software.SetValue("skin", skini, RegistryValueKind.DWord);
+            //在HKEY_LOCAL_MACHINE\SOFTWARE\test下创建一个名为“test”，值为“博客园”的键值。如果该键值原本已经存在，则会修改替换原来的键值，如果不存在则是创建该键值。
+            // 注意：SetValue()还有第三个参数，主要是用于设置键值的类型，如：字符串，二进制，Dword等等~~默认是字符串。如：
+            // software.SetValue("test", "0", RegistryValueKind.DWord); //二进制信息
+            key.Close();
+
+
         }
     }
 }
